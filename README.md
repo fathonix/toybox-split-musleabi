@@ -3,18 +3,26 @@
 This repository holds a Dockerfile to build statically compiled,
 split ToyBox binaries for Soft-Float 32-bit ARM.
 
+Currently only `ping`, `telnet`, `tar`, and `wget` is prebuilt.
+Run `make <command>` to try build other ToyBox commands.
+
 ## Getting Started
 
-Make sure you have Docker. Then run the following to build:
+Pull the latest image from Docker Hub.
 
 ```
-docker run -it toybox-split-musleabi:latest
+docker pull fathonix/toybox-split-musleabi
 ```
 
-Only `ping`, `telnet`, `tar`, and `wget` is built, you can tinker
-to add more ToyBox commands.
+Or build the image locally.
 
-# License
+```
+git clone https://github.com/fathonix/toybox-split-musleabi
+cd toybox-split-musleabi
+docker build -t toybox-split-musleabi .
+```
+
+## License
 
 The Dockerfile is licensed under the MIT license.
 © 2024 Aldo Adirajasa Fathoni

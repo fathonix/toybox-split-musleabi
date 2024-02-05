@@ -1,4 +1,4 @@
-# toybox-single-musleabi
+# toybox-split-musleabi
 
 This repository holds a Dockerfile to build statically compiled,
 split ToyBox binaries for Soft-Float 32-bit ARM.
@@ -8,7 +8,7 @@ split ToyBox binaries for Soft-Float 32-bit ARM.
 Make sure you have Docker. Then run the following to build:
 
 ```
-docker run -it toybox-android-single:latest
+docker run -it toybox-split-musleabi:latest
 ```
 
 Only `ping`, `telnet`, `tar`, and `wget` is built, you can tinker

@@ -43,6 +43,7 @@ RUN set -eux; \
 
 # Compile ToyBox with musl
 ENV CC=/work/musl/out/bin/musl-gcc \
+    STRIP=arm-linux-gnueabi-strip \
     CFLAGS=-static
 
 RUN set -eux; \

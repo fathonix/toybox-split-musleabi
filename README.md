@@ -16,5 +16,5 @@ to add more ToyBox commands.
 
 # License
 
-This Dockerfile is licensed under the MIT license.
-© Aldo Adirajasa Fathoni 2024
+The Dockerfile is licensed under the MIT license.
+© 2024 Aldo Adirajasa Fathoni

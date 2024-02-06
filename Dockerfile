@@ -48,6 +48,7 @@ RUN set -eux; \
 # Compile ToyBox with musl
 ENV CC=/work/musl/out/bin/musl-gcc \
     STRIP=arm-linux-gnueabi-strip \
+    PREFIX=/work/toybox/out \
     CFLAGS=-static
 
 RUN set -eux; \
@@ -65,7 +66,7 @@ RUN set -eux; \
 		-e 's/# CONFIG_WGET is not set/CONFIG_WGET=y/' \
 		-e 's/CONFIG_TOYBOX=y/# CONFIG_TOYBOX is not set/' \
 		.singleconfig; \
-	KCONFIG_CONFIG=.singleconfig OUTNAME=wget scripts/make.sh; \
-	file ping telnet tar wget
+	KCONFIG_CONFIG=.singleconfig OUTNAME="$PREFIX/wget" scripts/make.sh; \
+	file out/*
 
 WORKDIR /work/toybox

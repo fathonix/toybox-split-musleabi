@@ -10,6 +10,7 @@ RUN apt update && \
 		libc-dev-armel-cross    \
 		ca-certificates         \
 		libc-dev                \
+		patch                   \
 		make                    \
 		wget                    \
 		file                    \
@@ -32,9 +33,12 @@ RUN set -eux; \
 	tar xf toybox.tgz --strip-components=1; \
 	rm toybox.tgz
 
+COPY musl-*.patch /work/musl/
+
 # Compile musl
 RUN set -eux; \
 	cd /work/musl; \
+	for f in *.patch; do patch -p1 < "$f"; done; \
 	CROSS_COMPILE=arm-linux-gnueabi- ./configure \
 		--prefix=/work/musl/out \
 		--disable-shared \

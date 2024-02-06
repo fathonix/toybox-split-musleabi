@@ -1,0 +1,15 @@
+diff -uar musl-1.2.4/src/network/resolvconf.c musl-1.2.4-patched/src/network/resolvconf.c
+--- musl-1.2.4/src/network/resolvconf.c	2024-02-06 06:52:21
++++ musl-1.2.4-patched/src/network/resolvconf.c	2024-02-06 07:58:06
+@@ -84,8 +84,9 @@
+ 
+ no_resolv_conf:
+ 	if (!nns) {
+-		__lookup_ipliteral(conf->ns, "127.0.0.1", AF_UNSPEC);
+-		nns = 1;
++		__lookup_ipliteral(conf->ns, "8.8.8.8", AF_UNSPEC);
++		__lookup_ipliteral(conf->ns+1, "8.8.4.4", AF_UNSPEC);
++		nns = 2;
+ 	}
+ 
+ 	conf->nns = nns;

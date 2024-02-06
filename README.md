@@ -1,10 +1,12 @@
 # toybox-split-musleabi
 
-This repository holds a Dockerfile to build statically compiled,
-split ToyBox binaries for Soft-Float 32-bit ARM.
+This repository holds a Dockerfile to build split ToyBox
+binaries for Soft-Float 32-bit ARM.
+Statically linked with musl patched to enable
+DNS resolution on Android.
 
 Currently only `ping`, `telnet`, `tar`, and `wget` is prebuilt.
-Run `make <command>` to try build other ToyBox commands.
+Run `make <command>` to try to build other ToyBox commands.
 
 ## Getting Started
 

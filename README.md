@@ -1,12 +1,16 @@
 # toybox-split-musleabi
 
 This repository holds a Dockerfile to build split ToyBox
-binaries for Soft-Float 32-bit ARM.
-Statically linked with musl patched to enable
-DNS resolution on Android.
+binaries targeting soft-float, 32-bit ARM Linux EABI.
+Statically linked with musl patched to fallback to
+Google DNS on systems that don't have
+`/etc/resolv.conf` like Android.
 
 Currently only `ping`, `telnet`, `tar`, and `wget` is prebuilt.
-Run `make <command>` to try to build other ToyBox commands.
+Run `make <command>` to build other ToyBox commands.
+Note that all binaries have no support for time zones on
+Android and `wget` is built without HTTPS support
+to keep the resulting binary size small.
 
 ## Getting Started
 

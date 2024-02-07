@@ -8,8 +8,9 @@ Google DNS on systems that don't have
 
 Currently only `ping`, `telnet`, `tar`, and `wget` is prebuilt.
 Run `make <command>` to build other ToyBox commands.
-Note that all binaries have no support for time zones on
-Android and `wget` is built without HTTPS support
+Note that there is no support for building Android-specific
+and SELinux commands, all binaries have no support for time
+zones on Android, and `wget` is built without HTTPS support
 to keep the resulting binary size small.
 
 ## Getting Started

@@ -18,6 +18,7 @@ RUN apt update && \
 
 # Set musl and ToyBox versions
 ENV MUSL_VERSION=1.2.4 \
+    HEADERS_VERSION=4.19.88 \
     TOYBOX_VERSION=0.8.10
 
 # Download tarballs
@@ -27,6 +28,11 @@ RUN set -eux; \
 	wget -O musl.tgz "https://musl.libc.org/releases/musl-$MUSL_VERSION.tar.gz"; \
 	tar xf musl.tgz --strip-components=1; \
 	rm musl.tgz; \
+	mkdir -p /work/kernel-headers; \
+	cd /work/kernel-headers; \
+	wget -O headers.tgz "https://github.com/sabotage-linux/kernel-headers/archive/v$HEADERS_VERSION.tar.gz"; \
+	tar xf headers.tgz --strip-components=1; \
+	rm headers.tgz; \
 	mkdir -p /work/toybox; \
 	cd /work/toybox; \
 	wget -O toybox.tgz "https://landley.net/toybox/downloads/toybox-$TOYBOX_VERSION.tar.gz"; \
@@ -35,7 +41,7 @@ RUN set -eux; \
 
 COPY musl-*.patch /work/musl/
 
-# Compile musl
+# Compile musl and install kernel headers
 RUN set -eux; \
 	cd /work/musl; \
 	for f in *.patch; do patch -p1 < "$f"; done; \
@@ -43,7 +49,9 @@ RUN set -eux; \
 		--prefix=/work/musl/out \
 		--disable-shared \
 		--enable-wrapper; \
-	make install
+	make install; \
+	cd /work/kernel-headers; \
+	make ARCH=arm prefix=/work/musl/out install
 
 # Compile ToyBox with musl
 ENV CC=/work/musl/out/bin/musl-gcc \
